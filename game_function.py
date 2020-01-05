@@ -10,11 +10,12 @@ def check_events():
             sys.exit()
 
 
-def update_screen(ai_settings, screen, ship):
+def update_screen(ai_settings, screen, ship, avatar):
     """更新屏幕上的图像，并切换到新屏幕"""
     # 每次循环时都重绘屏幕
     screen.fill(ai_settings.bg_color)
     ship.blitme()
+    avatar.draw_character()
 
     # 让最近绘制的屏幕可见
     pygame.display.flip()

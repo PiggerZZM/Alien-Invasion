@@ -4,6 +4,7 @@ import pygame
 
 from settings import Settings
 from ship import Ship
+from character import Character
 
 import game_function as gf
 
@@ -18,6 +19,9 @@ def run_game():
     # 创建一艘飞船
     ship = Ship(screen)
 
+    # 创建游戏角色
+    avatar = Character(screen)
+
     # 开始游戏的主循环
     while True:
 
@@ -25,7 +29,7 @@ def run_game():
         gf.check_events()
 
         # 更新屏幕
-        gf.update_screen(ai_settings, screen, ship)
+        gf.update_screen(ai_settings, screen, ship, avatar)
 
 
 run_game()
