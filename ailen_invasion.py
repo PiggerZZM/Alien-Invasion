@@ -26,7 +26,7 @@ def run_game():
     while True:
 
         # 监听事件
-        gf.check_events()
+        gf.check_events(ship)
 
         # 更新屏幕
         gf.update_screen(ai_settings, screen, ship, avatar)
