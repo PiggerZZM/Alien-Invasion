@@ -16,6 +16,10 @@ def check_events(ship):
             if event.key == pygame.K_RIGHT:
                 # 向右标志设为真
                 ship.moving_right = True
+            # 是←箭头
+            elif event.key == pygame.K_LEFT:
+                # 向左标志设为真
+                ship.moving_left = True
 
         # 松开
         elif event.type == pygame.KEYUP:
@@ -23,6 +27,10 @@ def check_events(ship):
             if event.key == pygame.K_RIGHT:
                 # 向右标志设为假
                 ship.moving_right = False
+            # 是←箭头
+            elif event.key == pygame.K_LEFT:
+                # 向左标志设为假
+                ship.moving_left = False
 
 
 def update_screen(ai_settings, screen, ship, avatar):
