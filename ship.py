@@ -32,9 +32,10 @@ class Ship():
     def update(self):
         """根据移动标志调整飞船的位置"""
         # 更新center而不是centerx
-        if self.moving_right:
+        if self.moving_right and self.rect.right < self.screen_rect.right:
             self.center += self.ai_settings.ship_speed_factor
-        if self.moving_left:  # 这里注意用两个if来实现同时按下不移动，如果用elif则会导致右箭头始终处于优先判断
+        # 这里注意用两个if来实现同时按下不移动，如果用elif则会导致右箭头始终处于优先判断
+        if self.moving_left and self.rect.left > self.screen_rect.left:
             self.center -= self.ai_settings.ship_speed_factor
 
         # 根据self.center更新rect对象
