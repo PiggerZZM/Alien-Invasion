@@ -1,5 +1,3 @@
-import sys
-
 import pygame
 
 from settings import Settings
@@ -27,6 +25,9 @@ def run_game():
 
         # 监听事件
         gf.check_events(ship)
+
+        # 根据标志修改飞船位置
+        ship.update()
 
         # 更新屏幕
         gf.update_screen(ai_settings, screen, ship, avatar)
