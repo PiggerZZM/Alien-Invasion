@@ -49,7 +49,7 @@ def check_keyup_events(event, ship):
         ship.moving_left = False
 
 
-def update_screen(ai_settings, screen, ship, bullets, character):
+def update_screen(ai_settings, screen, ship, bullets, character, alien):
     """更新屏幕上的图像，并切换到新屏幕"""
     # 重绘屏幕
     screen.fill(ai_settings.bg_color)
@@ -61,6 +61,9 @@ def update_screen(ai_settings, screen, ship, bullets, character):
 
     # 绘制飞船
     ship.blitme()
+
+    # 绘制外星人
+    alien.blitme()
 
     # 绘制角色
     character.draw_character()
