@@ -3,6 +3,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from character import Character
+from pygame.sprite import Group
 
 import game_function as gf
 
@@ -17,20 +18,26 @@ def run_game():
     # 创建一艘飞船
     ship = Ship(ai_settings, screen)
 
+    # 创建一个用于存储子弹的编组
+    bullets = Group()
+
     # 创建游戏角色
-    avatar = Character(screen)
+    character = Character(screen)
 
     # 开始游戏的主循环
     while True:
 
         # 监听事件
-        gf.check_events(ship)
+        gf.check_events(ai_settings=ai_settings, screen=screen, ship=ship, bullets=bullets)
 
         # 根据标志修改飞船位置
         ship.update()
 
+        # 更新子弹位置
+        bullets.update()
+
         # 更新屏幕
-        gf.update_screen(ai_settings, screen, ship, avatar)
+        gf.update_screen(ai_settings=ai_settings, screen=screen, ship=ship, character=character, bullets=bullets)
 
 
 run_game()
