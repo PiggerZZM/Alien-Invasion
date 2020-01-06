@@ -31,10 +31,7 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
         ship.moving_left = True
     # 空格
     elif event.key == pygame.K_SPACE:
-        # 创建一颗子弹，并将其加入到编组bullets中
-        if len(bullets) < ai_settings.bullets_allowed:  # 检查子弹数量
-            new_bullet = Bullet(ai_settings, screen, ship)
-            bullets.add(new_bullet)
+        fire_bullet(ai_settings, screen, ship, bullets)
 
 
 def check_keyup_events(event, ship):
@@ -80,4 +77,11 @@ def update_bullets(bullets):
             bullets.remove(bullet)  # 这里还不知道Group()内部实现是链表还是数组，对于子弹应当使用链表
     # print(len(bullets))
 
+
+def fire_bullet(ai_settings, screen, ship, bullets):
+    """如果还没有到达限制，就发射一颗子弹"""
+    # 创建一颗子弹，并将其加入到编组bullets中
+    if len(bullets) < ai_settings.bullets_allowed:  # 检查子弹数量
+        new_bullet = Bullet(ai_settings, screen, ship)
+        bullets.add(new_bullet)
 
