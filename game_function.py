@@ -20,28 +20,26 @@ def check_events(ship):
 
 def check_keydown_events(event, ship):
     """响应按键"""
-    if event.type == pygame.KEYDOWN:
-        # 是→箭头
-        if event.key == pygame.K_RIGHT:
-            # 向右标志设为真
-            ship.moving_right = True
-        # 是←箭头
-        elif event.key == pygame.K_LEFT:
-            # 向左标志设为真
-            ship.moving_left = True
+    # 是→箭头
+    if event.key == pygame.K_RIGHT:
+        # 向右标志设为真
+        ship.moving_right = True
+    # 是←箭头
+    elif event.key == pygame.K_LEFT:
+        # 向左标志设为真
+        ship.moving_left = True
 
 
 def check_keyup_events(event, ship):
     """响应松开"""
-    if event.type == pygame.KEYUP:
-        # 是→箭头
-        if event.key == pygame.K_RIGHT:
-            # 向右标志设为假
-            ship.moving_right = False
-        # 是←箭头
-        elif event.key == pygame.K_LEFT:
-            # 向左标志设为假
-            ship.moving_left = False
+    # 是→箭头
+    if event.key == pygame.K_RIGHT:
+        # 向右标志设为假
+        ship.moving_right = False
+    # 是←箭头
+    elif event.key == pygame.K_LEFT:
+        # 向左标志设为假
+        ship.moving_left = False
 
 
 def update_screen(ai_settings, screen, ship, avatar):
