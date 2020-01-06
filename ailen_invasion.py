@@ -36,6 +36,12 @@ def run_game():
         # 更新子弹位置
         bullets.update()
 
+        # 删除已消失的子弹
+        for bullet in bullets.copy():  # 这里创建副本来遍历，对原列表进行删除，实际上复杂度是O(n^2)
+            if bullet.rect.bottom <= 0:  # 如果不用Group()直接用列表，是否能改进到O(n)?
+                bullets.remove(bullet)
+        print(len(bullets))
+
         # 更新屏幕
         gf.update_screen(ai_settings=ai_settings, screen=screen, ship=ship, character=character, bullets=bullets)
 
