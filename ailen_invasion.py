@@ -40,7 +40,7 @@ def run_game():
         for bullet in bullets.copy():  # 这里创建副本来遍历，对原列表进行删除，实际上复杂度是O(n^2)，还没有考虑删除移动元素的开销
             if bullet.rect.bottom <= 0:  # 如果不用Group()直接用列表，是否能改进到O(n)?
                 bullets.remove(bullet)  # 这里还不知道Group()内部实现是链表还是数组，对于子弹应当使用链表
-        print(len(bullets))
+        # print(len(bullets))
 
         # 更新屏幕
         gf.update_screen(ai_settings=ai_settings, screen=screen, ship=ship, character=character, bullets=bullets)
