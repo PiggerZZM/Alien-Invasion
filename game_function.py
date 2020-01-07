@@ -55,6 +55,9 @@ def update_screen(ai_settings, screen, ship, bullets, character, aliens):
     # 重绘屏幕
     screen.fill(ai_settings.bg_color)
 
+    # 绘制角色
+    character.draw_character()
+
     # 这里注意绘制的顺序就能实现图案覆盖
     # 在飞船和外星人后面重绘所有子弹
     for bullet in bullets.sprites():
@@ -66,17 +69,18 @@ def update_screen(ai_settings, screen, ship, bullets, character, aliens):
     # 绘制外星人
     aliens.draw(screen)  # 对编组调用.draw()方法会自动绘制里面的每个元素，位置由元素的rect决定
 
-    # 绘制角色
-    character.draw_character()
-
     # 让最近绘制的屏幕可见
     pygame.display.flip()
 
 
-def update_bullets(bullets):
+def update_bullets(aliens, bullets):
     """更新子弹的位置并删除已消失的子弹"""
     # 更新子弹的位置
     bullets.update()
+
+    # 检查是否有子弹击中了外星人
+    # 如果是这样，就删除相应的子弹和外星人
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
     # 删除已消失的子弹
     for bullet in bullets.copy():  # 这里创建副本来遍历，对原列表进行删除，实际上复杂度是O(n^2)，还没有考虑删除移动元素的开销
