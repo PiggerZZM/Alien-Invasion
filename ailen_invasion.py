@@ -41,7 +41,7 @@ def run_game():
         gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
 
         # 更新外星人
-        gf.update_aliens(ai_settings, aliens)
+        gf.update_aliens(ai_settings, ship, aliens)
 
         # 更新屏幕
         gf.update_screen(ai_settings=ai_settings, screen=screen, ship=ship, character=character, bullets=bullets, aliens=aliens)

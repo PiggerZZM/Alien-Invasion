@@ -78,6 +78,17 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
     # 更新子弹的位置
     bullets.update()
 
+    # 删除已消失的子弹
+    for bullet in bullets.copy():  # 这里创建副本来遍历，对原列表进行删除，实际上复杂度是O(n^2)，还没有考虑删除移动元素的开销
+        if bullet.rect.bottom <= 0:  # 如果不用Group()直接用列表，是否能改进到O(n)?
+            bullets.remove(bullet)  # 这里还不知道Group()内部实现是链表还是数组，对于子弹应当使用链表
+    # print(len(bullets))
+
+    check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets)
+
+
+def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
+    """响应子弹和外星人的碰撞"""
     # 检查是否有子弹击中了外星人
     # 如果是这样，就删除相应的子弹和外星人
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
@@ -86,12 +97,6 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
         # 删除现有的子弹并新建一群外星人
         bullets.empty()
         create_fleet(ai_settings, screen, ship, aliens)
-
-    # 删除已消失的子弹
-    for bullet in bullets.copy():  # 这里创建副本来遍历，对原列表进行删除，实际上复杂度是O(n^2)，还没有考虑删除移动元素的开销
-        if bullet.rect.bottom <= 0:  # 如果不用Group()直接用列表，是否能改进到O(n)?
-            bullets.remove(bullet)  # 这里还不知道Group()内部实现是链表还是数组，对于子弹应当使用链表
-    # print(len(bullets))
 
 
 def fire_bullet(ai_settings, screen, ship, bullets):
@@ -143,11 +148,15 @@ def get_number_rows(ai_settings, ship_height, alien_height):
     return number_rows
 
 
-def update_aliens(ai_settings, aliens):
+def update_aliens(ai_settings, ship, aliens):
     """更新外星人群中所有外星人的位置"""
     # 检查是否有外星人位于屏幕边缘，并更新整群外星人的位置
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
+
+    # 检测外星人和飞船之间的碰撞
+    if pygame.sprite.spritecollideany(ship, aliens):
+        print("Ship hit!!!")
 
 
 def check_fleet_edges(ai_settings, aliens):
