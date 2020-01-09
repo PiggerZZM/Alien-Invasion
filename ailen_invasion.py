@@ -4,6 +4,7 @@ from settings import Settings
 from ship import Ship
 from character import Character
 from pygame.sprite import Group
+from game_stats import GameStats
 
 import game_function as gf
 
@@ -28,6 +29,9 @@ def run_game():
     # 创建游戏角色
     character = Character(screen)
 
+    # 创建一个用于存储游戏统计信息的实例
+    stats = GameStats(ai_settings)
+
     # 开始游戏的主循环
     while True:
 
@@ -41,7 +45,7 @@ def run_game():
         gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
 
         # 更新外星人
-        gf.update_aliens(ai_settings, ship, aliens)
+        gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
 
         # 更新屏幕
         gf.update_screen(ai_settings=ai_settings, screen=screen, ship=ship, character=character, bullets=bullets, aliens=aliens)
