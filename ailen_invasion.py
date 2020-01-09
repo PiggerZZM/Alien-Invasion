@@ -43,7 +43,7 @@ def run_game():
 
         # 监听事件
         gf.check_events(ai_settings=ai_settings, screen=screen, stats=stats, play_button=play_button,
-                        ship=ship, aliens=aliens, bullets=bullets)
+                        sb=sb, ship=ship, aliens=aliens, bullets=bullets)
 
         if stats.game_active:
             # 根据标志修改飞船位置
@@ -59,4 +59,3 @@ def run_game():
 
 
 run_game()
-
