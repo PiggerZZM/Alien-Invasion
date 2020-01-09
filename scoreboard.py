@@ -20,7 +20,10 @@ class Scoreboard():
 
     def prep_score(self):
         """将得分转换为一副渲染的图象"""
-        score_str = str(self.stats.score)
+        # round()的第二个参数通常用来表示小数精确到小数点多少位，设为负数则将其圆整到10的整数倍
+        rounded_score = int(round(self.stats.score, -1))
+        # 插入逗号
+        score_str = "{:,}".format(rounded_score)
         self.score_image = self.font.render(score_str, True, self.text_color,
                                             self.ai_settings.bg_color)
 
