@@ -1,5 +1,6 @@
 import pygame
 
+from scoreboard import Scoreboard
 from settings import Settings
 from ship import Ship
 from character import Character
@@ -33,8 +34,9 @@ def run_game():
     # 创建游戏角色
     character = Character(screen)
 
-    # 创建一个用于存储游戏统计信息的实例
+    # 创建一个用于存储游戏统计信息的实例，并创建记分牌
     stats = GameStats(ai_settings)
+    sb = Scoreboard(ai_settings, screen, stats)
 
     # 开始游戏的主循环
     while True:
@@ -47,13 +49,13 @@ def run_game():
             # 根据标志修改飞船位置
             ship.update()
             # 更新子弹
-            gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
+            gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets)
             # 更新外星人
             gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
 
         # 更新屏幕
         gf.update_screen(ai_settings=ai_settings, screen=screen, stats=stats, ship=ship, character=character,
-                         aliens=aliens, bullets=bullets, play_button=play_button)
+                         aliens=aliens, bullets=bullets, play_button=play_button, sb=sb)
 
 
 run_game()

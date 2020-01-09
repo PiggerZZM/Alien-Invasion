@@ -95,7 +95,7 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens,
         ship.center_ship()
 
 
-def update_screen(ai_settings, screen, ship, stats, bullets, character, aliens, play_button):
+def update_screen(ai_settings, screen, ship, stats, sb, bullets, character, aliens, play_button):
     """更新屏幕上的图像，并切换到新屏幕"""
     # 重绘屏幕
     screen.fill(ai_settings.bg_color)
@@ -114,6 +114,9 @@ def update_screen(ai_settings, screen, ship, stats, bullets, character, aliens, 
     # 绘制外星人
     aliens.draw(screen)  # 对编组调用.draw()方法会自动绘制里面的每个元素，位置由元素的rect决定
 
+    # 显示得分
+    sb.show_score()
+
     # 如果游戏处于非活动状态，就绘制Play按钮
     if not stats.game_active:
         play_button.draw_button()
@@ -122,7 +125,7 @@ def update_screen(ai_settings, screen, ship, stats, bullets, character, aliens, 
     pygame.display.flip()
 
 
-def update_bullets(ai_settings, screen, ship, aliens, bullets):
+def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """更新子弹的位置并删除已消失的子弹"""
     # 更新子弹的位置
     bullets.update()
@@ -133,14 +136,18 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
             bullets.remove(bullet)  # 这里还不知道Group()内部实现是链表还是数组，对于子弹应当使用链表
     # print(len(bullets))
 
-    check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets)
+    check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets)
 
 
-def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
+def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """响应子弹和外星人的碰撞"""
     # 检查是否有子弹击中了外星人
     # 如果是这样，就删除相应的子弹和外星人
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+
+    if collisions:
+        stats.score += ai_settings.alien_points
+        sb.prep_score()
 
     if len(aliens) == 0:
         # 删除现有的子弹，加快游戏节奏，并新建一群外星人
