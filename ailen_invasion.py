@@ -38,14 +38,13 @@ def run_game():
         # 监听事件
         gf.check_events(ai_settings=ai_settings, screen=screen, ship=ship, bullets=bullets)
 
-        # 根据标志修改飞船位置
-        ship.update()
-
-        # 更新子弹
-        gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
-
-        # 更新外星人
-        gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
+        if stats.game_active:
+            # 根据标志修改飞船位置
+            ship.update()
+            # 更新子弹
+            gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
+            # 更新外星人
+            gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
 
         # 更新屏幕
         gf.update_screen(ai_settings=ai_settings, screen=screen, ship=ship, character=character, bullets=bullets, aliens=aliens)
