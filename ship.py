@@ -24,7 +24,7 @@ class Ship():
 
         # 在飞船的属性center中存储小数值
         self.center = float(self.rect.centerx)
-        self.bottom = float(self.rect.centery)
+        self.bottom = float(self.rect.bottom)
 
         # 移动标志
         self.moving_right = False

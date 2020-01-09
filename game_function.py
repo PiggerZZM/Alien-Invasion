@@ -6,12 +6,16 @@ from alien import Alien
 from time import sleep
 
 
-def check_events(ai_settings, screen, ship, bullets):
+def check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets):
     """响应按键和鼠标事件"""
     for event in pygame.event.get():
         # 退出
         if event.type == pygame.QUIT:
             sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            check_play_button(ai_settings, screen, stats, play_button, ship,
+                              aliens, bullets, mouse_x, mouse_y)
 
         # 按下
         elif event.type == pygame.KEYDOWN:
@@ -67,7 +71,25 @@ def check_keyup_events(event, ship):
         ship.moving_down = False
 
 
-def update_screen(ai_settings, screen, ship, bullets, character, aliens):
+def check_play_button(ai_settings, screen, stats, play_button, ship, aliens,
+                      bullets, mouse_x, mouse_y):
+    """在玩家单击Play按钮时开始新游戏"""
+    button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
+    if button_clicked and not stats.game_active:
+        # 重置游戏统计信息
+        stats.reset_stats()
+        stats.game_active = True
+
+        # 清空外星人列表和子弹列表
+        aliens.empty()
+        bullets.empty()
+
+        # 创建一群新的外星人，并让飞船居中
+        create_fleet(ai_settings, screen, ship, aliens)
+        ship.center_ship()
+
+
+def update_screen(ai_settings, screen, ship, stats, bullets, character, aliens, play_button):
     """更新屏幕上的图像，并切换到新屏幕"""
     # 重绘屏幕
     screen.fill(ai_settings.bg_color)
@@ -85,6 +107,10 @@ def update_screen(ai_settings, screen, ship, bullets, character, aliens):
 
     # 绘制外星人
     aliens.draw(screen)  # 对编组调用.draw()方法会自动绘制里面的每个元素，位置由元素的rect决定
+
+    # 如果游戏处于非活动状态，就绘制Play按钮
+    if not stats.game_active:
+        play_button.draw_button()
 
     # 让最近绘制的屏幕可见
     pygame.display.flip()

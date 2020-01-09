@@ -5,6 +5,7 @@ from ship import Ship
 from character import Character
 from pygame.sprite import Group
 from game_stats import GameStats
+from button import Button
 
 import game_function as gf
 
@@ -15,6 +16,9 @@ def run_game():
     ai_settings = Settings()
     screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))  # 创建surface对象
     pygame.display.set_caption("Alien Invasion")
+
+    # 创建Play按钮
+    play_button = Button(ai_settings, screen, "Play")
 
     # 创建一艘飞船
     ship = Ship(ai_settings, screen)
@@ -36,7 +40,8 @@ def run_game():
     while True:
 
         # 监听事件
-        gf.check_events(ai_settings=ai_settings, screen=screen, ship=ship, bullets=bullets)
+        gf.check_events(ai_settings=ai_settings, screen=screen, stats=stats, play_button=play_button,
+                        ship=ship, aliens=aliens, bullets=bullets)
 
         if stats.game_active:
             # 根据标志修改飞船位置
@@ -47,7 +52,8 @@ def run_game():
             gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
 
         # 更新屏幕
-        gf.update_screen(ai_settings=ai_settings, screen=screen, ship=ship, character=character, bullets=bullets, aliens=aliens)
+        gf.update_screen(ai_settings=ai_settings, screen=screen, stats=stats, ship=ship, character=character,
+                         aliens=aliens, bullets=bullets, play_button=play_button)
 
 
 run_game()
