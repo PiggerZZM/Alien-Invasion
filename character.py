@@ -8,7 +8,7 @@ class Character():
         self.screen = screen
 
         # 加载图象
-        self.image = pygame.image.load(r"images/ZZM.jpg")
+        self.image = pygame.image.load(r"images/ZZM.gif")
 
     def draw_character(self):
         # 这里要注意.blit()方法的实现原理，第一个参数是Surface对象，表示要绘制的对象
