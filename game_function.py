@@ -31,6 +31,14 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
     elif event.key == pygame.K_LEFT:
         # 向左标志设为真
         ship.moving_left = True
+    # 是↑箭头
+    elif event.key == pygame.K_UP:
+        # 向上标志设为真
+        ship.moving_up = True
+    # 是↓箭头
+    elif event.key == pygame.K_DOWN:
+        # 向下标志设为真
+        ship.moving_down = True
     # 空格
     elif event.key == pygame.K_SPACE:
         fire_bullet(ai_settings, screen, ship, bullets)
@@ -49,6 +57,14 @@ def check_keyup_events(event, ship):
     elif event.key == pygame.K_LEFT:
         # 向左标志设为假
         ship.moving_left = False
+    # 是↑箭头
+    elif event.key == pygame.K_UP:
+        # 向上标志设为假
+        ship.moving_up = False
+    # 是↓箭头
+    elif event.key == pygame.K_DOWN:
+        # 向下标志设为假
+        ship.moving_down = False
 
 
 def update_screen(ai_settings, screen, ship, bullets, character, aliens):
@@ -161,6 +177,7 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
 
     # 检查是否有外星人到达屏幕底端
     check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
+
 
 def check_fleet_edges(ai_settings, aliens):
     """有外星人到达边缘时采取相应的措施"""
