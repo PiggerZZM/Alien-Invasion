@@ -173,6 +173,7 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, 
 
 
 def start_new_level(stats, sb):
+    """升级游戏"""
     stats.level += 1
     sb.prep_level()
 
