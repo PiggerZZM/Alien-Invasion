@@ -169,8 +169,12 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, 
         create_fleet(ai_settings, screen, ship, aliens)
 
         # 如果整群外星人都被消灭，就提高一个等级
-        stats.level += 1
-        sb.prep_level()
+        start_new_level(stats, sb)
+
+
+def start_new_level(stats, sb):
+    stats.level += 1
+    sb.prep_level()
 
 
 def fire_bullet(ai_settings, screen, ship, bullets):
