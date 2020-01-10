@@ -11,6 +11,8 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
     for event in pygame.event.get():
         # 退出
         if event.type == pygame.QUIT:
+            with open(r'./high_score/high_score.txt', 'w') as file:
+                file.write(str(stats.high_score))
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -19,13 +21,13 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
 
         # 按下
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, screen, ship, bullets)
+            check_keydown_events(event, ai_settings, stats, screen, ship, bullets)
         # 松开
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
 
-def check_keydown_events(event, ai_settings, screen, ship, bullets):
+def check_keydown_events(event, ai_settings, stats, screen, ship, bullets):
     """响应按键"""
     # 是→箭头
     if event.key == pygame.K_RIGHT:
@@ -48,6 +50,8 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
         fire_bullet(ai_settings, screen, ship, bullets)
     # 按q退出游戏
     elif event.key == pygame.K_q:
+        with open(r'./high_score/high_score.txt', 'w') as file:
+            file.write(str(stats.high_score))
         sys.exit()
 
 
