@@ -91,10 +91,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
         stats.game_active = True
 
         # 重置记分牌图象
-        sb.prep_score()
-        sb.prep_high_score()
-        sb.prep_level()
-        sb.prep_ships()
+        sb.prep_image()
 
         # 清空外星人列表和子弹列表
         aliens.empty()
