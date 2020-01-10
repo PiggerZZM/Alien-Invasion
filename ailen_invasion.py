@@ -12,9 +12,14 @@ import game_function as gf
 
 
 def run_game():
-    # 初始化游戏、设置并创建一个屏幕对象
-    pygame.init()  # 初始化背景设置
+
+    # 初始化背景设置
+    pygame.init()
+
+    # 创建游戏设置类的实例
     ai_settings = Settings()
+
+    # 创建屏幕
     screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))  # 创建surface对象
     pygame.display.set_caption("Alien Invasion")
 
@@ -34,8 +39,10 @@ def run_game():
     # 创建游戏角色
     character = Character(screen)
 
-    # 创建一个用于存储游戏统计信息的实例，并创建记分牌
+    # 创建一个用于存储游戏统计信息的实例
     stats = GameStats(ai_settings)
+
+    # 创建记分牌
     sb = Scoreboard(ai_settings, screen, stats)
 
     # 开始游戏的主循环
