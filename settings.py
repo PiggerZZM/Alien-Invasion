@@ -3,6 +3,7 @@ class Settings():
 
     def __init__(self):
         """初始化游戏的静态设置"""
+
         # 屏幕设置
         self.screen_width = 800
         self.screen_height = 600
@@ -26,6 +27,7 @@ class Settings():
         # 外星人点数的提升倍率
         self.score_scale = 1.5
 
+        # 初始化其他动态的设置
         self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self):
