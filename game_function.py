@@ -11,18 +11,16 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
     for event in pygame.event.get():
         # 退出
         if event.type == pygame.QUIT:
-            with open(r'./high_score/high_score.txt', 'w') as file:
-                file.write(str(stats.high_score))
-            sys.exit()
+            exit_game(stats)
+        # 鼠标按下
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             check_play_button(ai_settings, screen, stats, sb, play_button, ship,
                               aliens, bullets, mouse_x, mouse_y)
-
-        # 按下
+        # 键盘按下
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, ai_settings, stats, screen, ship, bullets)
-        # 松开
+        # 键盘松开
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
@@ -31,47 +29,44 @@ def check_keydown_events(event, ai_settings, stats, screen, ship, bullets):
     """响应按键"""
     # 是→箭头
     if event.key == pygame.K_RIGHT:
-        # 向右标志设为真
         ship.moving_right = True
     # 是←箭头
     elif event.key == pygame.K_LEFT:
-        # 向左标志设为真
         ship.moving_left = True
     # 是↑箭头
     elif event.key == pygame.K_UP:
-        # 向上标志设为真
         ship.moving_up = True
     # 是↓箭头
     elif event.key == pygame.K_DOWN:
-        # 向下标志设为真
         ship.moving_down = True
     # 空格
     elif event.key == pygame.K_SPACE:
         fire_bullet(ai_settings, screen, ship, bullets)
     # 按q退出游戏
     elif event.key == pygame.K_q:
-        with open(r'./high_score/high_score.txt', 'w') as file:
-            file.write(str(stats.high_score))
-        sys.exit()
+        exit_game(stats)
+
+
+def exit_game(stats):
+    """退出游戏"""
+    with open(r'./high_score/high_score.txt', 'w') as file:
+        file.write(str(stats.high_score))
+    sys.exit()
 
 
 def check_keyup_events(event, ship):
     """响应松开"""
     # 是→箭头
     if event.key == pygame.K_RIGHT:
-        # 向右标志设为假
         ship.moving_right = False
     # 是←箭头
     elif event.key == pygame.K_LEFT:
-        # 向左标志设为假
         ship.moving_left = False
     # 是↑箭头
     elif event.key == pygame.K_UP:
-        # 向上标志设为假
         ship.moving_up = False
     # 是↓箭头
     elif event.key == pygame.K_DOWN:
-        # 向下标志设为假
         ship.moving_down = False
 
 
