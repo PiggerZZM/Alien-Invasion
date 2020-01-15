@@ -1,8 +1,8 @@
 import sys
 import pygame
 
-from bullet import Bullet
-from alien import Alien
+from src.bullet import Bullet
+from src.alien import Alien
 from time import sleep
 
 
@@ -49,7 +49,7 @@ def check_keydown_events(event, ai_settings, stats, screen, ship, bullets):
 
 def exit_game(stats):
     """退出游戏"""
-    with open(r'./high_score/high_score.txt', 'w') as file:
+    with open(r'../high_score/high_score.txt', 'w') as file:
         file.write(str(stats.high_score))
     sys.exit()
 

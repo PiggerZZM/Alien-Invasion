@@ -11,7 +11,7 @@ class Ship(Sprite):
         self.ai_settings = ai_settings
 
         # 加载飞船图像并获取其外接矩形
-        self.image = pygame.image.load(r"images/ship.gif")  # .load()方法返回这个图象的surface
+        self.image = pygame.image.load(r"../images/ship.gif")  # .load()方法返回这个图象的surface
         self.rect = self.image.get_rect()  # .get_rect()方法获取相应surface的rect属性
         self.screen_rect = screen.get_rect()
 

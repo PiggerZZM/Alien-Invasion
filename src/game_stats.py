@@ -12,8 +12,8 @@ class GameStats():
         self.reset_stats()
 
         # 在开始时读入high_score.txt中记录的最高分，如果不存在则最高分为0
-        if os.path.exists(r'./high_score/high_score.txt'):
-            with open(r'./high_score/high_score.txt', 'r') as file:
+        if os.path.exists(r'../high_score/high_score.txt'):
+            with open(r'../high_score/high_score.txt', 'r') as file:
                 self.high_score = int(file.read())
         else:
             self.high_score = 0

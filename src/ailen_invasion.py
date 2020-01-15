@@ -1,14 +1,14 @@
 import pygame
 
-from scoreboard import Scoreboard
-from settings import Settings
-from ship import Ship
-from character import Character
+from src.scoreboard import Scoreboard
+from src.settings import Settings
+from src.ship import Ship
+from src.character import Character
 from pygame.sprite import Group
-from game_stats import GameStats
-from button import Button
+from src.game_stats import GameStats
+from src.button import Button
 
-import game_function as gf
+from src import game_function as gf
 
 
 def run_game():
