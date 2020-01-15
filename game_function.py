@@ -138,6 +138,7 @@ def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
             bullets.remove(bullet)  # 这里还不知道Group()内部实现是链表还是数组，对于子弹应当使用链表
     # print(len(bullets))
 
+    # 响应子弹与外星人的碰撞
     check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets)
 
 
