@@ -22,6 +22,9 @@ class Alien(Sprite):
         # 存储外星人的准确位置
         self.x = float(self.rect.x)
 
+        # fleet_direction为1表示向右移，为-1表示向左移
+        self.fleet_direction = 1
+
     def blitme(self):
         """在指定位置绘制外星人"""
         self.screen.blit(self.image, self.rect)
@@ -29,7 +32,7 @@ class Alien(Sprite):
     def update(self):
         """向左右移动外星人"""
         self.x += (self.ai_settings.alien_speed_factor
-                   * self.ai_settings.fleet_direction)
+                   * self.fleet_direction)
         self.rect.x = self.x
 
     def check_edges(self):
