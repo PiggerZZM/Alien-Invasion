@@ -19,13 +19,13 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
                               aliens, bullets, mouse_x, mouse_y)
         # 键盘按下
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, stats, screen, ship, bullets)
+            check_keydown_events(event, ai_settings, stats, sb, screen, ship, aliens, bullets)
         # 键盘松开
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
 
-def check_keydown_events(event, ai_settings, stats, screen, ship, bullets):
+def check_keydown_events(event, ai_settings, stats, sb, screen, ship, aliens, bullets):
     """响应按键"""
     # 是→箭头
     if event.key == pygame.K_RIGHT:
@@ -45,6 +45,10 @@ def check_keydown_events(event, ai_settings, stats, screen, ship, bullets):
     # 按q退出游戏
     elif event.key == pygame.K_q:
         exit_game(stats)
+    # 按p开始游戏
+    elif event.key == pygame.K_p:
+        start_game(ai_settings, screen, stats, sb, ship, aliens,
+                   bullets)
 
 
 def exit_game(stats):
@@ -75,26 +79,34 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
     """在玩家单击Play按钮时开始新游戏"""
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
-        # 重置游戏设置
-        ai_settings.initialize_dynamic_settings()
+        # 开始游戏
+        start_game(ai_settings, screen, stats, sb, ship, aliens,
+                   bullets)
 
-        # 隐藏光标
-        pygame.mouse.set_visible(False)
 
-        # 重置游戏统计信息
-        stats.reset_stats()
-        stats.game_active = True
+def start_game(ai_settings, screen, stats, sb, ship, aliens,
+               bullets):
+    """开始游戏"""
+    # 重置游戏设置
+    ai_settings.initialize_dynamic_settings()
 
-        # 重置记分牌图象
-        sb.prep_image()
+    # 隐藏光标
+    pygame.mouse.set_visible(False)
 
-        # 清空外星人列表和子弹列表
-        aliens.empty()
-        bullets.empty()
+    # 重置游戏统计信息
+    stats.reset_stats()
+    stats.game_active = True
 
-        # 创建一群新的外星人，并让飞船居中
-        create_fleet(ai_settings, screen, ship, aliens)
-        ship.center_ship()
+    # 重置记分牌图象
+    sb.prep_image()
+
+    # 清空外星人列表和子弹列表
+    aliens.empty()
+    bullets.empty()
+
+    # 创建一群新的外星人，并让飞船居中
+    create_fleet(ai_settings, screen, ship, aliens)
+    ship.center_ship()
 
 
 def update_screen(ai_settings, screen, ship, stats, sb, bullets, character, aliens, play_button):
@@ -287,5 +299,3 @@ def check_high_score(stats, sb):
     if stats.score > stats.high_score:
         stats.high_score = stats.score
         sb.prep_high_score()
-
-
