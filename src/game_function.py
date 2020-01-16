@@ -4,6 +4,8 @@ import pygame
 from src.bullet import Bullet
 from src.alien import Alien
 from time import sleep
+from random import randint
+from random import choice
 
 
 def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets):
@@ -195,17 +197,19 @@ def create_fleet(ai_settings, screen, aliens):
     """创建外星人群"""
     # 创建外星人群
     for alien_number in range(5):
-        # 创建一个外星人并将其加入当前行
-        create_alien(ai_settings, screen, aliens, alien_number)
+        # 创建一个外星人
+        create_alien(ai_settings, screen, aliens)
 
 
-def create_alien(ai_settings, screen, aliens, alien_number):
-    """创建一个外星人并将其放在当前行"""
+def create_alien(ai_settings, screen, aliens):
+    """创建一个外星人"""
     alien = Alien(ai_settings, screen)
     alien_width = alien.rect.width
-    alien.x = alien_width + 2 * alien_width * alien_number
+    alien.x = randint(alien_width, screen.get_rect().right - alien_width)
+    # 如果外星人的x坐标在创建时就和屏幕碰撞将会有bug
     alien.rect.x = alien.x
     alien.rect.y = alien.rect.height
+    alien.fleet_direction = choice([1, -1])
     aliens.add(alien)
 
 
