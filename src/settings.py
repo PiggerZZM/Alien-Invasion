@@ -34,7 +34,8 @@ class Settings():
         """初始化随游戏进行而变化的设置"""
         self.ship_speed_factor = 1.5
         self.bullet_speed_factor = 3
-        self.alien_speed_factor = 1
+        self.alien_x_speed_factor = 1
+        self.alien_y_speed_factor = 0.2
 
         # 计分
         self.alien_points = 50
@@ -43,7 +44,7 @@ class Settings():
         """提高速度设置和外星人点数"""
         self.ship_speed_factor *= self.speedup_scale
         self.bullet_speed_factor *= self.speedup_scale
-        self.alien_speed_factor *= self.speedup_scale
+        self.alien_x_speed_factor *= self.speedup_scale
+        self.alien_y_speed_factor *= self.speedup_scale
 
         self.alien_points = int(self.alien_points * self.score_scale)
-        # print(self.alien_points)
