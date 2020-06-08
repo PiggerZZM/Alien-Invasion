@@ -2,6 +2,7 @@ import pygame
 from pygame.sprite import Sprite
 from random import random
 
+
 class Alien(Sprite):
     """表示某个外星人的类"""
 
@@ -42,7 +43,6 @@ class Alien(Sprite):
         # 向下移动速度
         self.y += self.ai_settings.alien_y_speed_factor * self.y_speed
         self.rect.y = self.y
-
 
     def check_edges(self):
         """如果外星人位于屏幕边缘，则返回True"""

@@ -1,7 +1,7 @@
 import pygame
 
 
-class Character():
+class Character:
     """游戏角色类"""
 
     def __init__(self, screen):

@@ -59,4 +59,3 @@ class Ship(Sprite):
         """让飞船在屏幕上居中"""
         self.center = self.screen_rect.centerx
         self.bottom = self.screen_rect.bottom
-

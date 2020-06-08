@@ -12,7 +12,6 @@ from src import game_function as gf
 
 
 def run_game():
-
     # 初始化背景设置
     pygame.init()
 
@@ -24,7 +23,7 @@ def run_game():
     pygame.display.set_caption("Alien Invasion")
 
     # 创建Play按钮
-    play_button = Button(ai_settings, screen, "Play")
+    play_button = Button(screen, "Play")
 
     # 创建一艘飞船
     ship = Ship(ai_settings, screen)
@@ -56,7 +55,7 @@ def run_game():
             # 根据标志修改飞船位置
             ship.update()
             # 更新子弹
-            gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets)
+            gf.update_bullets(ai_settings, screen, stats, sb, aliens, bullets)
             # 更新外星人
             gf.update_aliens(ai_settings, stats, screen, sb, ship, aliens, bullets)
 
@@ -65,4 +64,5 @@ def run_game():
                          aliens=aliens, bullets=bullets, play_button=play_button, sb=sb)
 
 
-run_game()
+if __name__ == '__main__':
+    run_game()

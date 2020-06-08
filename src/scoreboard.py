@@ -4,7 +4,7 @@ from pygame.sprite import Group
 from src.ship import Ship
 
 
-class Scoreboard():
+class Scoreboard:
     """显示得分信息的类"""
 
     def __init__(self, ai_settings, screen, stats):
